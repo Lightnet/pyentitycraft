@@ -80,21 +80,25 @@ pyinstaller -w --onefile src/main.py
 ```
   Does not work.
 ```
-pyinstaller --onefile --add-data=".venv/Lib/site-packages/panda3d;panda3d" src/main.py
+pyinstaller --onefile --add-data=".venv/Lib/site-packages/panda3d;panda3d" --add-data="src/config;." --clean src/main.py
 ```
   Work require link and show console log
 ```
-pyinstaller -w --onefile --add-data=".venv/Lib/site-packages/panda3d;panda3d" src/main.py
+pyinstaller -w --onefile --add-data=".venv/Lib/site-packages/panda3d;panda3d" --add-data="src/config;." src/main.py
 ```
   Work require link and hide console log
 
+  
+
+
+ * https://pyinstaller.org/en/stable/operating-mode.html
  * https://stackoverflow.com/questions/72078847/pyinstaller-executable-not-working-with-panda3d-no-graphics-pipe-availabe
 
-# Notes:
+## Notes:
  * Launching Panda3D tends to crash window application.
  * Window application error not showing top.
  * It might be incorrect set up to close when run.
- * Need to run admin to load config?
+ * config folder is add for permission access file else go admin to access read data.
 
 # Links and notes:
  * https://stackoverflow.com/questions/52540121/make-pipenv-create-the-virtualenv-in-the-same-folder

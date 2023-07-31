@@ -11,11 +11,13 @@
 
 
 
-
-
-https://www.youtube.com/watch?v=Iv_dECet_oM
-
-https://plainenglish.io/blog/pyinstaller-exe-false-positive-trojan-virus-resolved-b33842bd3184
+ * 
+ * 
+ * 
+ * https://pyinstaller.org/en/stable/spec-files.html
+ * https://plainenglish.io/blog/packaging-data-files-to-pyinstaller-binaries-6ed63aa20538
+ * https://www.youtube.com/watch?v=Iv_dECet_oM
+ * https://plainenglish.io/blog/pyinstaller-exe-false-positive-trojan-virus-resolved-b33842bd3184
 
 
 ```
