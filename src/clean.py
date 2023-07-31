@@ -4,7 +4,7 @@ import os
 from pathlib import Path
 
 # START CONFIG
-PROJECT_MODULE = "pycraft"
+PROJECT_MODULE = "pyentitycraft"
 
 SRC_DIR = Path(__file__).resolve().parent
 #print("SRC_DIR: ", SRC_DIR)

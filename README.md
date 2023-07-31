@@ -4,6 +4,9 @@
 
 # Created By: Lightnet
 
+# Status:
+ * prototype.
+
 # Information:
   To build minecraft clone in python 3.11.x with panda3D and other packages.
   
@@ -78,3 +81,7 @@ pyinstaller --onefile src/main.py
 # Links and notes:
  * https://stackoverflow.com/questions/52540121/make-pipenv-create-the-virtualenv-in-the-same-folder
  * https://pipenv-fork.readthedocs.io/en/latest/advanced.html
+
+# Credits:
+ * https://www.youtube.com/watch?v=xV3gH1JZew4  How to Create Minecraft in Python and Panda3D
+ * https://www.youtube.com/watch?v=Ab8TOSFfNp4  Creating a Voxel Engine (like Minecraft) from Scratch in Python

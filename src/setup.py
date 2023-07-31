@@ -16,7 +16,7 @@ from Cython.Build import cythonize
 #import numpy
 
 # START CONFIG
-PROJECT_MODULE = "pycraft"
+PROJECT_MODULE = "pyentitycraft"
 
 SRC_DIR = Path(__file__).resolve().parent
 MODULE_DIR = SRC_DIR / PROJECT_MODULE
