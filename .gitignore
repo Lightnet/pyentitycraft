@@ -2,6 +2,7 @@
 .venv
 *.pyd
 *.c
+__pycache__
 dist
 build
 main.spec

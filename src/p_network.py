@@ -6,6 +6,7 @@
   https://docs.panda3d.org/1.10/python/programming/networking/index
 
 """
+import sys
 from panda3d.core import WindowProperties
 
 from direct.showbase.ShowBase import ShowBase
@@ -40,27 +41,24 @@ class Game(ShowBase):
     wp = WindowProperties()
     wp.setTitle('py network')
     self.win.requestProperties(wp)
-    """
-    wp = WindowProperties()
-    wp.setZOrder(WindowProperties().ZTop)
-    wp.setForeground(True)
-    wp.setTitle('py example')
-    self.win.requestProperties(wp)
-    """
+    
     self.build_ui()
 
   def build_ui(self):
+    self.textNetwork = OnscreenText(text='Network', pos=(0.0, 0.0), scale=0.07)
+
     self.btn_host = DirectButton(text=("HOST"),scale=0.07, command=self.btn_server_host)
     self.btn_host.setPos(0.95,0,-0.95)
     
     self.btn_join = DirectButton(text=("JOIN"),scale=0.07, command=self.btn_client_join)
     self.btn_join.setPos(-0.95,0,-0.95)
-    pass
+    #pass
 
   def debuild_ui(self):
     self.btn_host.destroy()
     self.btn_join.destroy()
-    pass
+    self.textNetwork.destroy()
+    #pass
 
   def btn_server_host(self):
     print("host")
@@ -101,7 +99,6 @@ class Game(ShowBase):
         self.cReader.addConnection(newConnection)     # Begin reading connection
     return Task.cont
 
-  
   def btn_host_close(self):
     # terminate connection to all clients
     for aClient in self.activeConnections:
@@ -189,5 +186,14 @@ class Game(ShowBase):
     pass
 
 if __name__ == "__main__":
-  game = Game()
-  game.run()  
+  try:
+    game = Game()
+    game.run()
+  except OSError as err:
+    print("OS error:", err)
+  except ValueError:
+    print("Oops!  That was no valid number.  Try again...")
+    print(ValueError)
+  except Exception as err:
+    print(f"Unexpected {err=}, {type(err)=}")
+    raise

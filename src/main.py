@@ -1,5 +1,7 @@
-from pyentitycraft import run
+from pyentitycraft import Game
 
 if __name__ == "__main__":
   #print("Hello World")
-  run()
+  #run()
+  game = Game()
+  game.run()

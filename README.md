@@ -76,13 +76,25 @@ This from Cython package.
 
 # Build Application Binary:
 ```
-pyinstaller --onefile src/main.py
+pyinstaller -w --onefile src/main.py
 ```
+  Does not work.
+```
+pyinstaller --onefile --add-data=".venv/Lib/site-packages/panda3d;panda3d" src/main.py
+```
+  Work require link and show console log
+```
+pyinstaller -w --onefile --add-data=".venv/Lib/site-packages/panda3d;panda3d" src/main.py
+```
+  Work require link and hide console log
+
+ * https://stackoverflow.com/questions/72078847/pyinstaller-executable-not-working-with-panda3d-no-graphics-pipe-availabe
 
 # Notes:
  * Launching Panda3D tends to crash window application.
  * Window application error not showing top.
  * It might be incorrect set up to close when run.
+ * Need to run admin to load config?
 
 # Links and notes:
  * https://stackoverflow.com/questions/52540121/make-pipenv-create-the-virtualenv-in-the-same-folder
@@ -93,6 +105,7 @@ pyinstaller --onefile src/main.py
     * https://github.com/shaunwa/cbt-panda3d-minecraft
  * https://www.youtube.com/watch?v=Ab8TOSFfNp4  Creating a Voxel Engine (like Minecraft) from Scratch in Python
     * https://github.com/StanislavPetrovV/Minecraft
+ * https://www.youtube.com/watch?v=xcoeBlEjOqQ Panda3D tutorial #05 - configurations
 
 
  
