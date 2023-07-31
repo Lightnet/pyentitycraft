@@ -1,0 +1,9 @@
+
+.venv
+*.pyd
+*.c
+dist
+build
+main.spec
+Pipfile.lock
+Pipfile
