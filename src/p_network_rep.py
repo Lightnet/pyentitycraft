@@ -18,6 +18,10 @@ from panda3d.core import URLSpec, ConfigVariableInt, ConfigVariableString
 from direct.gui.OnscreenText import OnscreenText
 from panda3d.core import TextNode
 
+#================================================
+# SERVER CLASS
+#================================================
+
 # the main server class
 class GameServerRepository(ServerRepository):
   """The server repository class"""
@@ -115,6 +119,10 @@ class AIRepository(ClientRepository):
         server.  The given doID is the ID of the client who left us. """
         print("Client left us: ", doID)
 
+#================================================
+# CLIENT CLASS
+#================================================
+
 # client
 class GameClientRepository(ClientRepository):
 
@@ -193,11 +201,15 @@ class GameClientRepository(ClientRepository):
         self.ignore(self.uniqueName('createReady'))
 
         print("Client Ready")
-        base.messenger.send("client-ready")
+        self.base.messenger.send("client-ready")
 
 
 #================================================
-# SETUP
+#              SETUP
+#================================================
+
+#================================================
+# SERVER
 #================================================
 def server_setup():
   # initialize the engine
@@ -207,6 +219,10 @@ def server_setup():
   AIRepository()
   base.run()
   #pass
+
+#================================================
+# CLIENT BASE
+#================================================
 
 class ClientGame(ShowBase):
   def __init__(self):
@@ -236,6 +252,9 @@ class ClientGame(ShowBase):
     self.title["text"] = "Panda3D: Tutorial - Distributed Network (CONNECTED)"
     print("client connect?")
 
+#================================================
+# CLIENT
+#================================================
 def client_setup():
   # initialize the engine
   #base = ShowBase()

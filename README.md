@@ -13,10 +13,14 @@
   
   By using the pipenv to isolated environment. So it act like any local machine computer for fixed version control. To prevent break packages and python version.
 
+  Note that docs has little information about the Panda3D API as it say you must be skill programer. Still simple examples on their github Panda3D.
+
+# Network:
+  There are current two types of network code build in for Panda3d. There is docs on the panda3d site.
+
 # Programs:
- * Python 3.11
+ * Python 3.11.4
  * toolchain for binary build for OS
- * 
  
 # Packages:
  * panda3d==1.10.13
