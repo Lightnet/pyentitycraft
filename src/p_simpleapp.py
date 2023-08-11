@@ -11,6 +11,7 @@ from panda3d.core import loadPrcFile
 from panda3d.core import loadPrcFileData
 from panda3d.core import ConfigVariableManager
 
+# Testing
 from panda3d.core import ConfigPageManager
 from panda3d.core import ConfigVariableString
 

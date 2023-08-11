@@ -1,3 +1,7 @@
+
+
+# main entry file
+
 from pyentitycraft import Game
 
 if __name__ == "__main__":

@@ -44,6 +44,12 @@ Create folder current project dir:
 ```
 By default it will not create current project folder. It goes to user folder virtual env folder with name prefixed.
 
+```
+python3 -m venv .venv
+```
+Using the module to create .venv
+
+
 ## pipenv others:
   Note in case not working.
 ```
@@ -92,14 +98,8 @@ pyinstaller -w --onefile --add-data=".venv/Lib/site-packages/panda3d;panda3d" --
 ```
   Work require link and hide console log
 
-  
-
-
- * https://pyinstaller.org/en/stable/operating-mode.html
- * https://stackoverflow.com/questions/72078847/pyinstaller-executable-not-working-with-panda3d-no-graphics-pipe-availabe
-
 ## Notes:
- * Launching Panda3D tends to crash window application.
+ * Launching Panda3D tends to crash or close window application.
  * Window application error not showing top.
  * It might be incorrect set up to close when run.
  * config folder is add for permission access file else go admin to access read data.
@@ -107,6 +107,8 @@ pyinstaller -w --onefile --add-data=".venv/Lib/site-packages/panda3d;panda3d" --
 # Links and notes:
  * https://stackoverflow.com/questions/52540121/make-pipenv-create-the-virtualenv-in-the-same-folder
  * https://pipenv-fork.readthedocs.io/en/latest/advanced.html
+ * https://pyinstaller.org/en/stable/operating-mode.html
+ * https://stackoverflow.com/questions/72078847/pyinstaller-executable-not-working-with-panda3d-no-graphics-pipe-availabe
 
 # Credits:
  * https://www.youtube.com/watch?v=xV3gH1JZew4  How to Create Minecraft in Python and Panda3D
