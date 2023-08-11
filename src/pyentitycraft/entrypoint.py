@@ -9,7 +9,7 @@ middle mouse = drag obrit
 right mouse=zoom
 left mouse=pan
 """
-
+import platform
 # entry point
 from direct.showbase.ShowBase import ShowBase
 #from direct.showbase.Loader import Loader
@@ -43,44 +43,58 @@ class Game(ShowBase):
     dt = globalClock.getDt()
 
     if self.cameraSwingActivated:
-      md = self.win.getPointer(0)
-      mouseX = md.getX()
-      mouseY = md.getY()
+      props = base.win.getProperties()
+      actualMode = props.getMouseMode()
+      #print("actualMode:", actualMode)
 
-      mouseChangeX = mouseX - self.LastMouseX
-      mouseChangeY = mouseY - self.LastMouseY
-      #mouseChangeX = mouseX
-      #mouseChangeY = mouseY
+      if actualMode == WindowProperties.M_relative:
+        md = self.win.getPointer(0)
+        mouseX = md.getX()
+        mouseY = md.getY()
 
-      self.cameraSwingFactor = 10
+        mouseChangeX = mouseX - self.LastMouseX
+        mouseChangeY = mouseY - self.LastMouseY
 
-      currentH = self.camera.getH()
-      currentP = self.camera.getP()
+        self.cameraSwingFactor = 10
 
-      self.camera.setHpr(
-        currentH - mouseChangeX * dt * self.cameraSwingFactor,
-        min(90, max(-90, currentP - mouseChangeY * dt * self.cameraSwingFactor)),
-        0
-      )
-      self.LastMouseX = mouseX
-      self.LastMouseY = mouseY
+        currentH = self.camera.getH()
+        currentP = self.camera.getP()
 
-      """
-      # for windwos mouse center pos
-      mw = base.mouseWatcherNode
-      if mw.hasMouse():
-        # get the position, which at center is (0, 0)
-        x, y = mw.getMouseX(), mw.getMouseY()
+        self.camera.setHpr(
+          currentH - mouseChangeX * dt * self.cameraSwingFactor,
+          min(90, max(-90, currentP - mouseChangeY * dt * self.cameraSwingFactor)),
+          0
+        )
+        self.LastMouseX = mouseX
+        self.LastMouseY = mouseY
+      else:
+        mw = base.mouseWatcherNode
+        if mw.hasMouse():
+          # get the position, which at center is (0, 0)
+          x, y = mw.getMouseX(), mw.getMouseY()
 
-        # move mouse back to center
-        props = base.win.getProperties()
-        base.win.movePointer(0,
-                            props.getXSize() // 2,
-                            props.getYSize() // 2)
-        # now, x and y can be considered relative movements
-        # need work
-        # https://docs.panda3d.org/1.10/python/programming/hardware-support/mouse-support
-      """
+          self.cameraSwingFactor = 10000
+
+          mouseChangeX = x
+          mouseChangeY = y * -1
+
+          currentH = self.camera.getH()
+          currentP = self.camera.getP()
+
+          self.camera.setHpr(
+            currentH - mouseChangeX * dt * self.cameraSwingFactor,
+            min(90, max(-90, currentP - mouseChangeY * dt * self.cameraSwingFactor)),
+            0
+          )
+
+          # move mouse back to center
+          props = base.win.getProperties()
+          base.win.movePointer(0,
+                              props.getXSize() // 2,
+                              props.getYSize() // 2)
+          # now, x and y can be considered relative movements
+          # https://docs.panda3d.org/1.10/python/programming/hardware-support/mouse-support
+        
     return task.cont
 
   def setupControls(self):
@@ -105,8 +119,12 @@ class Game(ShowBase):
 
     properties = WindowProperties()
     properties.setCursorHidden(True)
-    #properties.setMouseMode(WindowProperties.M_relative) # mac & linux
-    properties.setMouseMode(WindowProperties.M_confined) # windows
+    print("platform.system(): ", platform.system())
+    if platform.system() == 'windows':
+      properties.setMouseMode(WindowProperties.M_confined) # windows
+    else:
+      properties.setMouseMode(WindowProperties.M_relative) # mac & linux
+    
     self.win.requestProperties(properties)
     #self.base.win.requestProperties(properties)
   
