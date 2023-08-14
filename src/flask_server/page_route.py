@@ -4,7 +4,7 @@ from flask import (
 )
 import jwt
 
-#from flask_server.auth import login_required
+from flask_server.auth import login_required
 bp = Blueprint('page_route', __name__)
 
 @bp.route("/")
@@ -17,7 +17,7 @@ def index():
   return render_template('index.html')
   #return "Hello"
 
-#@bp.route("/test_access")
-#@login_required
-#def test_access():
-  #return "test access"
+@bp.route("/test_access")
+@login_required
+def test_access():
+  return "test access"

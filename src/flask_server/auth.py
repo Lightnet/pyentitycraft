@@ -134,9 +134,15 @@ def login_required(view):
   def wrapped_view(**kwargs):
     print("CHECK LOGIN REQUIRED")
     print(g)
+    token = request.cookies.get('token')
+    if token:
+      pass
+    else:
+      #return redirect(url_for('/login'))#incorrect code
+      return redirect(url_for('auth.html_sign_in'))# <file.function>
     #if g.user is None:
       #return redirect(url_for('/login'))
-      ##return redirect(url_for('auth.login'))
+      #return redirect(url_for('auth.login'))
     return view(**kwargs)
   return wrapped_view
 
