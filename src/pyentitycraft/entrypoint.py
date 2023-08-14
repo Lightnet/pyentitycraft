@@ -9,6 +9,11 @@ middle mouse = drag obrit
 right mouse=zoom
 left mouse=pan
 """
+
+from flask_server import testpackage
+
+testpackage()
+
 import platform
 from math import pi, sin, cos
 # entry point
@@ -21,11 +26,24 @@ from panda3d.core import TransparencyAttrib
 from panda3d.core import WindowProperties
 from panda3d.core import CollisionTraverser, CollisionNode, CollisionBox, CollisionRay, CollisionHandlerQueue
 
+#from panda3d.core import 
+
 
 loadPrcFile("config/Config.prc")
 
 def degToRad(degrees):
   return degrees * (pi / 180.0)
+
+class GameObject():
+  pass
+
+class Player(GameObject):
+  pass
+
+class Enemy(GameObject):
+  pass
+
+
 
 class Game(ShowBase):
   # set up
@@ -35,7 +53,7 @@ class Game(ShowBase):
     print("init game...")
 
     # Check to make sure keyboard events working
-    self.messenger.toggle_verbose()
+    #self.messenger.toggle_verbose()
 
     self.selectBlockType = 'grass'
 
@@ -48,6 +66,20 @@ class Game(ShowBase):
     self.setupControls()
 
     self.task_mgr.add(self.update, 'update')
+
+    self.getDataTest()
+
+  # https://discourse.panda3d.org/t/clever-node-tree-modify-and-restore-how-to/5113/2
+  def getDataTest(self):
+    #self.dataRootNode()
+    #self.render()
+    originalScene = self.render.node().copySubgraph()
+    print("originalScene:", originalScene)
+    for child in originalScene.children:
+      #print("node: ", child)
+      print("node: ", child.getName())#pass node name
+    #self.render.ls()
+    return
 
   def update(self, task):
     dt = globalClock.getDt() #from task loop?
@@ -169,6 +201,8 @@ class Game(ShowBase):
     self.accept('2', self.setSelectBlockType, ['dirt']) 
     self.accept('3', self.setSelectBlockType, ['sand']) 
     self.accept('4', self.setSelectBlockType, ['stone']) 
+
+    self.accept('tab', self.getDataTest) 
   
   def setSelectBlockType(self, type):
     self.selectBlockType = type
@@ -279,7 +313,8 @@ class Game(ShowBase):
 
   def generateTerrain(self):
 
-    for z in range(10):
+    #for z in range(10):
+    for z in range(3):# UP
       for y in range(20):
         for x in range(20):
           #newBlockNode = self.render.attachNewNode('new-block-placeholder')

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <script type="application/javascript">
+    function clickAdd(){
+      let userid = document.getElementById('userid').value;
+      let alias = document.getElementById('alias').value;
+      let content = document.getElementById('content').value;
+      console.log("userid: " , userid)
+      console.log("alias: " , alias)
+      console.log("content: " , content)
+    }
+  </script>
+  <div>
+    <a href="/game/home"> Game </a>
+    <a href="/signout">Sign Out</a>
+  </div>
+  <label>Game Entity!</label>
+  <table>
+    <tbody>
+      <tr>
+        <td>
+          <label> userid: </label>
+        </td>
+        <td>
+          <input id="userid">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label> alias: </label>
+        </td>
+        <td>
+          <input id="alias">
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <textarea id="content"></textarea>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <button onclick="clickAdd();"> Add </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+    
+{% endblock %}

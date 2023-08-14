@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <script type="application/javascript">
+
+    async function click_signin(){
+      console.log("click")
+      let alias = document.getElementById('alias').value;
+      let pass = document.getElementById('passphrase').value;
+      console.log("alias:", alias)
+      console.log("pass:", pass)
+
+      try {
+        const response = await fetch("/api/signin",{
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            alias:alias,
+            passphrase:pass
+          }),
+        });
+        const result = await response.json();
+        console.log(result);
+        if(result){
+          if(result.api){
+            if(result.api=="PASS"){
+              document.location.href = "/"      
+            }
+          }else{
+            console.log("FAIL")
+          }
+        }
+        //document.location.href = "/"
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    function click_cancel(){
+      console.log("click")
+      document.location.href = "/"
+    }
+
+  </script>
+  <form action="javascript:void(0);">
+    <table>
+      <tbody>
+        <tr>
+          <td colspan="2">
+            <label> Login Access </label>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label> Alias: </label>
+          </td>
+          <td>
+            <input id="alias" name="alias" placeholder="User Name"/>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label> Passphrase: </label>
+          </td>
+          <td>
+            <input id="passphrase" name="passphrase" placeholder="Passphrase"/>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" >
+            <input type="submit" style="float: right;" onclick="click_signin();" value="Submit">
+            <input type="submit" style="float: right;" onclick="click_cancel();" value="Cancel">
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+{% endblock %}

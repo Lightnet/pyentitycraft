@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<script type="application/javascript">
+
+  async function click_register(){
+    console.log("click")
+    let alias = document.getElementById('alias').value;
+    let pass = document.getElementById('passwd').value;
+    console.log("alias:", alias)
+    console.log("pass:", pass)
+
+    try {
+      const response = await fetch("/api/signup",{
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          alias:alias,
+          passphrase:pass
+        }),
+      });
+      const result = await response.json();
+      console.log(result);
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  //action="/api/signup" method="POST"
+  //javascript:void(0);
+
+  async function click_cancel(){
+    document.location.href = "/"
+  }
+
+</script>
+<form action="javascript:void(0);">
+    <table>
+      <tbody>
+        <tr>
+          <td colspan="2">
+            <label> Login Access </label>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <label> Alias: </label>
+          </td>
+          <td>
+            <input id="alias" name="alias" placeholder="User Name"/>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <label> Passphrase: </label>
+          </td>
+          <td>
+            <input id="passwd" name="passphrase" placeholder="Passphrase"/>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <input style="float: right;" type="submit" onclick="click_register();" value="Submit">
+            <input style="float: right;" type="submit" onclick="click_cancel();" value="Cancel">
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+{% endblock %}

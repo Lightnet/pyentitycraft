@@ -36,7 +36,7 @@ Note that pip3 vs pip is different in install those packages.
 ```
 pip3 install --user pipenv
 ```
-Note this will install virtual environment to deal with python and packages different versions. In case of build error.
+Note this will install virtual environment to deal with python and packages different versions. In case of build conlfict error.
 
 Create folder current project dir:
 ```
@@ -44,18 +44,6 @@ Create folder current project dir:
 ```
 By default it will not create current project folder. It goes to user folder virtual env folder with name prefixed.
 
-```
-python3 -m venv .venv
-```
-Using the module to create .venv
-
-
-## pipenv others:
-  Note in case not working.
-```
-set PIPENV_VENV_IN_PROJECT=1
-unset PIPENV_VENV_IN_PROJECT
-```
 # run pipenv:
 ```
 pipenv shell
@@ -68,15 +56,11 @@ pipenv install -r requirements.txt
 ```
 Install packages in from requirements.txt need to run and build application.
 
-```
-pipenv install <package_name>
-pipenv install <package_name>==<version>
-```
-
 # Run Application:
 ```
 python src/main.py
 ```
+Note that need to run pipenv shell for in case in of missing packages.
 
 # Build Lib:
 ```
@@ -109,7 +93,10 @@ pyinstaller -w --onefile --add-data=".venv/Lib/site-packages/panda3d;panda3d" --
  * https://pipenv-fork.readthedocs.io/en/latest/advanced.html
  * https://pyinstaller.org/en/stable/operating-mode.html
  * https://stackoverflow.com/questions/72078847/pyinstaller-executable-not-working-with-panda3d-no-graphics-pipe-availabe
-
+ * https://www.scaleway.com/en/docs/compute/gpu/how-to/use-pipenv/
+ * 
+ * 
+ * 
 # Credits:
  * https://www.youtube.com/watch?v=xV3gH1JZew4  How to Create Minecraft in Python and Panda3D
     * https://github.com/shaunwa/cbt-panda3d-minecraft
@@ -118,4 +105,20 @@ pyinstaller -w --onefile --add-data=".venv/Lib/site-packages/panda3d;panda3d" --
  * https://www.youtube.com/watch?v=xcoeBlEjOqQ Panda3D tutorial #05 - configurations
 
 
- 
+# pipenv others:
+  Note in case not working.
+```
+set PIPENV_VENV_IN_PROJECT=1
+unset PIPENV_VENV_IN_PROJECT
+```
+
+```
+python3 -m venv .venv
+```
+Using the module to create .venv
+
+
+```
+pipenv install <package_name>
+pipenv install <package_name>==<version>
+```
