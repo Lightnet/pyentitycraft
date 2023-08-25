@@ -10,9 +10,8 @@ right mouse=zoom
 left mouse=pan
 """
 
-from flask_server import testpackage
-
-testpackage()
+#from flask_server import testpackage
+#testpackage()
 
 import platform
 from math import pi, sin, cos
@@ -28,6 +27,10 @@ from panda3d.core import CollisionTraverser, CollisionNode, CollisionBox, Collis
 
 #from panda3d.core import 
 
+from direct.gui.DirectGui import DirectButton
+from direct.gui.OnscreenText import OnscreenText
+from direct.gui.DirectGui import DirectFrame
+from direct.gui.DirectGui import DirectEntry
 
 loadPrcFile("config/Config.prc")
 
@@ -43,8 +46,6 @@ class Player(GameObject):
 class Enemy(GameObject):
   pass
 
-
-
 class Game(ShowBase):
   # set up
   def __init__(self):
@@ -56,6 +57,8 @@ class Game(ShowBase):
     #self.messenger.toggle_verbose()
 
     self.selectBlockType = 'grass'
+    self.cameraSwingActivated = False
+    self.is_menu = False
 
     self.setupLights()
     self.loadModels()
@@ -65,9 +68,69 @@ class Game(ShowBase):
     self.captureMouse()
     self.setupControls()
 
+    self.releaseMouse()#need to do for testing and disable camera move
+
     self.task_mgr.add(self.update, 'update')
 
-    self.getDataTest()
+    self.init_menu_network()
+
+
+    #self.getDataTest()
+  def init_menu_network(self):
+    print("init network menu")
+
+    self.frame_network = DirectFrame(
+      #frameColor=(0, 0, 0, 1),
+      frameSize=(-0.5, 0.5, -0.5, 0.5),
+      pos=(0, 0, 0)
+    )
+
+    textNetwork = OnscreenText(
+      parent=self.frame_network,
+      text='Network', 
+      pos=(0.0, 0.45),
+      scale=0.07
+    )
+
+    self.entry_server = DirectEntry(
+      parent=self.frame_network,
+      text = "", 
+      scale=.05, 
+      #command=setText,
+      initialText="localhost", 
+      numLines = 2, 
+      focus=1, 
+      #focusInCommand=clearText
+    )
+    self.entry_server.setPos(-0.1,0,0.2)
+
+    self.entry_port = DirectEntry(
+      parent=self.frame_network,
+      text = "", 
+      scale=.05, 
+      #command=setText,
+      initialText="1024", 
+      numLines = 2, 
+      focus=1, 
+      #focusInCommand=clearText
+    )
+    self.entry_port.setPos(-0.1,0,0.1)
+
+    btn_host = DirectButton(
+      parent=self.frame_network,
+      text=("HOST"),
+      scale=0.07, 
+      command=self.init_server
+    )
+    btn_host.setPos(0.0,0,-0.1)
+
+    btn_join = DirectButton(
+      parent=self.frame_network,
+      text=("JOIN"),
+      scale=0.07, 
+      command=self.init_client_join
+    )
+    btn_join.setPos(0.0,0,-0.2)
 
   # https://discourse.panda3d.org/t/clever-node-tree-modify-and-restore-how-to/5113/2
   def getDataTest(self):
@@ -208,8 +271,9 @@ class Game(ShowBase):
     self.selectBlockType = type
 
   def handleLeftClick(self):
-    self.captureMouse()
-    self.removeBlock()
+    if self.is_menu:
+      self.captureMouse()
+      self.removeBlock()
 
   def removeBlock(self):
     if self.rayQueue.getNumEntries() > 0:
@@ -380,6 +444,16 @@ class Game(ShowBase):
     #self.sandBlock.setPos(0,4,0)
     #self.sandBlock.reparentTo(self.render)
 
+
+  def init_server(self):
+    print("init server")
+    self.frame_network.destroy()
+    pass
+
+  def init_client_join(self):
+    print("init client")
+    self.frame_network.destroy()
+    pass
 #def foo():
   #print("bar")
 

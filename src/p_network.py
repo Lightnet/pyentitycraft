@@ -129,7 +129,7 @@ class Game(ShowBase):
     msgID = myIterator.getUint8()
     if msgID == PRINT_MESSAGE:
         messageToPrint = myIterator.getString()
-        print(messageToPrint)
+        print("server: ",messageToPrint)
 
   def tskReaderPolling(self,taskdata):
     if self.cReader.dataAvailable():
@@ -183,8 +183,8 @@ class Game(ShowBase):
 
   def btn_client_ping(self):
     myPyDatagram = self.myNewPyDatagram()  # build a datagram to send
+    print("client...")
     self.cWriter.send(myPyDatagram, self.myConnection)
-    pass
 
 if __name__ == "__main__":
   try:
